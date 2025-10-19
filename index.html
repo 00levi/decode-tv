@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'">
+  <title>Channel Player</title>
+  <style>
+    html, body, #player, iframe {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      overflow: hidden;
+      cursor: none;
+    }
+    iframe {
+      border: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    #overlay {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      background: rgba(181, 179, 179, 0.6);
+      color: black;
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: Arial, sans-serif;
+      font-size: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 200ms ease, transform 200ms ease;
+      z-index: 9999;
+    }
+    #overlay.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #menu {
+      position: fixed;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 380px;
+      max-width: 45%;
+      background: rgba(0,0,0,0.75);
+      color: white;
+      padding: 18px;
+      box-sizing: border-box;
+      transform: translateX(100%);
+      transition: transform 200ms ease;
+      z-index: 9998;
+      overflow-y: auto;
+    }
+    #menu.show {
+      transform: translateX(0%);
+    }
+    .channel-item {
+      padding: 10px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      cursor: pointer;
+    }
+    .channel-item.selected {
+      background: rgba(121, 85, 158, 0.635);
+    }
+    #hint {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+      font-family: Arial, sans-serif;
+      z-index: 9997;
+    }
+  </style>
+</head>
+<body>
+  <div id="player">
+    <iframe id="playerFrame" src="about:blank" allowfullscreen allow="autoplay; fullscreen"></iframe>
+  </div>
+
+  <div id="overlay"></div>
+
+  <div id="menu" aria-hidden="true"></div>
+
+  <div id="hint">flechas ↑ ↓ para cambiar. Derecha → abre menú. ok selecciona.</div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
